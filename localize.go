@@ -16,6 +16,7 @@ type Localize struct {
 	GetParamName    string
 }
 
+// Default creates a default localize struct with prefilled default values.
 func Default() *Localize {
 	return &Localize{
 		CookieName:      "__i18n",
@@ -26,6 +27,8 @@ func Default() *Localize {
 	}
 }
 
+// SetCookieLanguage sets a cookie on every request based on a certain verifications
+// made by the `GetLanguageFromRequest` function.
 func (l *Localize) SetCookieLanguage(c *web.C, h http.Handler) http.Handler {
 	fn := func(w http.ResponseWriter, r *http.Request) {
 		l.createCookie(w, l.GetLanguageFromRequest(r))
@@ -34,6 +37,9 @@ func (l *Localize) SetCookieLanguage(c *web.C, h http.Handler) http.Handler {
 	return http.HandlerFunc(fn)
 }
 
+// GetLanguageFromRequest finds a language by checking three elements:
+// a GET querystring value; a cookie found in the request; or finally a
+// default language predefined.
 func (l *Localize) GetLanguageFromRequest(r *http.Request) string {
 	// Check if there's a "lang" parameter somewhere
 	if r.FormValue(l.GetParamName) != "" {
