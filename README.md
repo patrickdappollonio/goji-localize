@@ -42,7 +42,7 @@ loc := &localize.Localize{
 	HttpOnly:        true,
 	GetParamName:    "lang",
 	DefaultLanguage: "en",
-		AvailableLanguages: []string{"en", "fr", "es"},
+	AvailableLanguages: []string{"en", "fr", "es"},
 }
 ```
 
