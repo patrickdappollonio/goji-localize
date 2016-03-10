@@ -9,7 +9,7 @@
 // You can either create your own setup...
 //		loc := localize.Default()
 //
-//		// this will create the following struct
+//		// the line above is equivalent to this...
 //		loc := &localize.Localize{
 //			CookieName:      "__i18n", // the name of the cookie where language will be stored
 //			CookieExpires:   time.Now().AddDate(1, 0, 0), // the cookie's expiration date
