@@ -20,36 +20,37 @@ the request itself, or the default value if no language code was found.
 You can either create your own setup...
 
 ```go
-	loc := localize.Default()
-	// the line above is equivalent to this...
-	loc := &localize.Localize{
-		CookieName:      "__i18n", // the name of the cookie where language will be stored
-		CookieExpires:   time.Now().AddDate(1, 0, 0), // the cookie's expiration date
-		HttpOnly:        true, // if the cookie will be read via Javascript you can set this to false
-		DefaultLanguage: "en", // the GET parameter - querystring that, if present, will change the language
-			AvailableLanguages: []string{"en"}, // a slice of available languages to use
-		GetParamName:    "lang", // the default language, this can be any string
-	}
+loc := localize.Default()
+
+// the line above is equivalent to this...
+loc := &localize.Localize{
+	CookieName:      "__i18n", // the name of the cookie where language will be stored
+	CookieExpires:   time.Now().AddDate(1, 0, 0), // the cookie's expiration date
+	HttpOnly:        true, // if the cookie will be read via Javascript you can set this to false
+	DefaultLanguage: "en", // the GET parameter - querystring that, if present, will change the language
+		AvailableLanguages: []string{"en"}, // a slice of available languages to use
+	GetParamName:    "lang", // the default language, this can be any string
+}
 ```
 
 or you can use a custom configuration, like:
 
 ```go
-	loc := &localize.Localize{
-		CookieName:      "my_i18n_cookie",
-		CookieExpires:   time.Now().Add(50 * 24 * time.Hour),
-		HttpOnly:        true,
-		GetParamName:    "lang",
-		DefaultLanguage: "en",
-			AvailableLanguages: []string{"en", "fr", "es"},
-	}
+loc := &localize.Localize{
+	CookieName:      "my_i18n_cookie",
+	CookieExpires:   time.Now().Add(50 * 24 * time.Hour),
+	HttpOnly:        true,
+	GetParamName:    "lang",
+	DefaultLanguage: "en",
+		AvailableLanguages: []string{"en", "fr", "es"},
+}
 ```
 
 Then, later in your Goji initialization, you can write:
 
 ```go
-	goji.Use(loc.SetLanguageCookie)
-	goji.Serve()
+goji.Use(loc.SetLanguageCookie)
+goji.Serve()
 ```
 
 Once you have the `SetLanguageCookie` function in place, you can ask any time the
