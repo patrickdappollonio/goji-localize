@@ -1,5 +1,8 @@
-// Package goji-localize is a Goji middleware you can append by using `goji.Use()`
-// to all requests. It **does not perform localization** only language detection.
+// Package goji-localize is a Goji middleware to detect the current language
+// of a user who visits a Goji-powered website. It works by appending `goji.Use()`
+// which will affect all requests. It **does not perform localization (translation)**,
+// but only two-letter language detection only.
+//
 // The package uses cookies in the user browser to keep track of the language in
 // use. Overwriting a cookie will change the language, as well as passing a querystring
 // value.
